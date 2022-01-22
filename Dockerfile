@@ -7,6 +7,14 @@ LABEL authors="Riaz Arbi"
 USER root
 
 RUN pip3 install luno-python
+ 
+# For arrow to install bindings
+ENV LIBARROW_DOWNLOAD=true
+ENV LIBARROW_MINIMAL=false
+
+# Install jupyter R kernel
+RUN install2.r --skipinstalled --error  --ncpus 3 --deps TRUE -l $R_LIBS_SITE   \
+    gt dplyr arrow blastula 
     
 # Run as NB_USER ============================================================
 
