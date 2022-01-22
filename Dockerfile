@@ -12,7 +12,14 @@ RUN pip3 install luno-python
 ENV LIBARROW_DOWNLOAD=true
 ENV LIBARROW_MINIMAL=false
 
-# Install jupyter R kernel
+# Install R packages
+RUN DEBIAN_FRONTEND=noninteractive \ 
+    apt-get update \
+ && DEBIAN_FRONTEND=noninteractive \
+    apt-get install -yq  \
+    libsodium-dev libmariadbclient-dev libmariadb-client-lgpl-dev \
+ && rm -rf /tmp/*
+
 RUN install2.r --skipinstalled --error  --ncpus 3 --deps TRUE -l $R_LIBS_SITE   \
     gt dplyr arrow blastula 
     
