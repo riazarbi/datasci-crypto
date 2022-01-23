@@ -1,4 +1,4 @@
-FROM riazarbi/datasci-gui-minimal:20220122123942
+FROM riazarbi/datasci-gui-minimal:20220123105237
 
 LABEL authors="Riaz Arbi"
 
@@ -24,7 +24,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
  && rm -rf /tmp/*
 
 RUN install2.r --skipinstalled --error  --ncpus 3 --deps TRUE -l $R_LIBS_SITE   \
-    gt dplyr arrow blastula 
+    gt dplyr arrow blastula readr
     
 # Run as NB_USER ============================================================
 
