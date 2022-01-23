@@ -17,7 +17,10 @@ RUN DEBIAN_FRONTEND=noninteractive \
     apt-get update \
  && DEBIAN_FRONTEND=noninteractive \
     apt-get install -yq  \
-    libsodium-dev libmariadbclient-dev  \
+    libsodium-dev \
+    libmariadbclient-dev  \
+    libsecret-1-dev \
+    libpq-dev \
  && rm -rf /tmp/*
 
 RUN install2.r --skipinstalled --error  --ncpus 3 --deps TRUE -l $R_LIBS_SITE   \
