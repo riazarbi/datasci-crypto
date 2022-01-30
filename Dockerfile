@@ -24,7 +24,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
  && rm -rf /tmp/*
 
 RUN install2.r --skipinstalled --error  --ncpus 3 --deps TRUE -l $R_LIBS_SITE   \
-    gt dplyr arrow blastula readr
+    gt dplyr arrow blastula readr prophet forecast
     
 # Run as NB_USER ============================================================
 
