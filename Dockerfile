@@ -16,8 +16,9 @@ ENV LIBARROW_MINIMAL=false
 RUN DEBIAN_FRONTEND=noninteractive \ 
     apt-get update \
  && DEBIAN_FRONTEND=noninteractive \
-    apt-get install -yq  \
+    apt-get install -y  \
     libsodium-dev \
+    libmariadb-dev \
     libmariadbclient-dev  \
     libsecret-1-dev \
     libpq-dev \

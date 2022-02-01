@@ -12,8 +12,6 @@ sender <- secrets$arbidata$gmail$username
 Sys.setenv(SMTP_PASSWORD = secrets$arbidata$gmail$password)
 recipients <- sapply(secrets$crypto_users, function(x) x[["email"]][["address"]])
 
-# Subject ---
-subject <- "Daily BTCZAR Arbitrage Report"
 
 # Date ---
 date_time <- add_readable_time()
@@ -32,13 +30,16 @@ mood <- ifelse(result[3] < 1, "You'll lose money",
                       "Lookin pretty good",
                       "Holy shit do it now!!")))
 
+# Subject ---
+subject <- paste("BTCZAR Arb:", mood)
+
 # Body ---
 message_body <-
 glue(
 "
 ### Dispatch: {date_time}
 
-### TL;DR: {mood}
+### TL;DR: ZAR300k nets {result[4]}% 
 
 ### Deets
 
