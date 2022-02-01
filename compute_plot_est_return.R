@@ -1,5 +1,4 @@
 library(dplyr)
-library(dplyr)
 library(xts)
 library(data.table)
 library(ggplot2)
@@ -23,7 +22,7 @@ data_component <- yahoo_usdzar %>%
          yahoo_ask = ask) %>%
   mutate(across(everything(), as.numeric))
 yahoo_usdzar <- xts(data_component, order.by=time_component)
-yahoo_plot <- yahoo_usdzar %>% last("1 month") %>% 
+yahoo_plot <- yahoo_usdzar %>% last("4 weeks") %>% 
   ggplot(aes(x = Index, y = yahoo_ask)) + 
   geom_line()  + 
   scale_y_continuous(name = "USDZAR") +
@@ -42,7 +41,7 @@ data_component <- kraken_xbtusd %>%
          kraken_spot = last) %>%
   mutate(across(everything(), as.numeric))
 kraken_xbtusd <- xts(data_component, order.by=time_component)
-kraken_plot <- kraken_xbtusd %>% last("1 month") %>% 
+kraken_plot <- kraken_xbtusd %>% last("4 weeks") %>% 
   ggplot(aes(x = Index, y = kraken_spot)) + 
   geom_line()  + 
   scale_y_continuous(name = "Kraken Spot") +
@@ -62,7 +61,7 @@ data_component <- luno_xbtzar %>% select(bid, ask, last_trade) %>%
   mutate(across(everything(), as.numeric))
 luno_xbtzar <- xts(data_component, order.by=time_component)
 
-luno_plot <- luno_xbtzar %>% last("1 month") %>% 
+luno_plot <- luno_xbtzar %>% last("4 weeks") %>% 
   ggplot(aes(x = Index, y = luno_last)) + 
   geom_line()  + 
   scale_y_continuous(name = "Luno Last") +
@@ -119,13 +118,9 @@ zarbtc_estimated_return <- fread(file_path)
 time_component <- as.POSIXct(as.numeric(zarbtc_estimated_return$timestamp)/1000, origin="1970-01-01")
 data_component <- zarbtc_estimated_return %>% select(starts_with("ZAR"))
 zarbtc_estimated_return <- xts(data_component, order.by=time_component)
-estimated_return_plot <- zarbtc_estimated_return %>% 
-  last('1 month') %>% 
-  plot(legend.loc = "bottomleft",
-     main = "Estimated % return, last month")
 
 estimated_return_plot <- zarbtc_estimated_return %>%
-  last("1 month") %>% 
+  last("4 weeks") %>% 
     ggplot(aes(x = Index)) + 
    geom_line(aes(y = ZAR100k, color = "ZAR100k")) +
   geom_line(aes(y = ZAR200k, color = "ZAR200k")) +
